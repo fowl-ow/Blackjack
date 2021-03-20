@@ -1,4 +1,4 @@
-package com.company;
+package de.fachinformatik.fowl;
 
 import java.util.ArrayList;
 import java.util.Collections;

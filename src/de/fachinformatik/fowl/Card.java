@@ -1,4 +1,4 @@
-package com.company;
+package de.fachinformatik.fowl;
 
 public class Card {
 
