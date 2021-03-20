@@ -10,6 +10,7 @@ public class CardTest {
         Card card = new Card(Suit.SPADES,Rank.ACE);
         assertEquals(card.getRank(),Rank.ACE);
         assertEquals(card.getSuit(),Suit.SPADES);
+        assertEquals(card.getValue(),1);
     }
 
     @Test
