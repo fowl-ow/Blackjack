@@ -25,5 +25,4 @@ public class Card {
         temp += suit.toString();
         return temp;
     }
-
 }

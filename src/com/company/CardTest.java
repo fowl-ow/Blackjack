@@ -1,7 +1,5 @@
 package com.company;
 
-import java.lang.Object;
-
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,5 +19,4 @@ public class CardTest {
         String testString = Rank.ACE.toString() + " of " + Suit.SPADES.toString();
         assertEquals(actualCardString,testString);
     }
-
 }

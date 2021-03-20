@@ -1,14 +1,11 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class Main {
 
     public static void main(String[] args) {
 
-//        Card card1 = new Card(Suit.SPADES,Rank.ACE);
-//        System.out.println("Card: "+card1.getRank()+" of "+card1.getSuit());
+        Card card1 = new Card(Suit.SPADES,Rank.ACE);
+        System.out.println("Card: "+card1.getRank()+" of "+card1.getSuit());
 
 
         Deck deck = new Deck(true,1);
