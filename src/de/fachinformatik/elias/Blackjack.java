@@ -1,72 +1,72 @@
 package de.fachinformatik.elias;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Blackjack {
 
-    Deck deck = new Deck(true);
-    Hand dealerHand = new Hand();
-    Hand playerHand = new Hand();
-    Scanner scan = new Scanner(System.in);
-    String input = "notEmpty";
+    private int wait = 500;
+    private Deck deck;
+    private Player player;
+    private Dealer dealer;
+    private Scanner scan;
+    private String input;
 
-    public Blackjack() {}
+    public Blackjack() {
+        dealer = new Dealer();
+        deck = new Deck(true);
+        scan = new Scanner(System.in);
+        initPlayer();
+        playRound();
+    }
 
-    public void start() {
-        welcomeMessage();
-        input = takeInput();
-        String start = "start";
-        String exit = "exit";
-        if (input.equals(start)); {
-            System.out.println("fuck off");
-            playRound();
+    private void initPlayer() {
+        System.out.println("Please enter your name: ");
+        player = new Player(scan.next());
+        System.out.println("Hi "+player.getName()+".");
+    }
+
+    private void playRound() {
+        try {setupRound();} catch (InterruptedException e) {e.printStackTrace();}
+        showStatus();
+        checkStatus();
+    }
+
+    private void checkStatus() {
+        if (player.getHand().getValue()==21) System.out.println("Congrats, you've won :D");
+        else if (player.getHand().getValue()>21) player.getHand().updateValue();
+        else if (player.getHand().getValue()>21) player.getHand().updateValue();
+        else if (player.getHand().getValue()>21) player.getHand().updateValue();
+        else if (player.getHand().getValue()>21) player.getHand().updateValue();
+        else if (player.getHand().getValue()>21) System.out.println("You've lost D:");
+
+
+    }
+
+    private void showStatus() {
+        System.out.println("You're hand is valued at: " + player.getHand().getValue());
+    }
+
+
+        private void setupRound() throws InterruptedException {
+            System.out.println("Let's begin!");
+            Thread.sleep(wait);
+            player.drawCard(deck);
+            System.out.println("You've drawn the "+player.getHand().getHand().get(0)+".");
+            Thread.sleep(wait);
+            dealer.drawCard(deck);
+            System.out.println("The dealer has drawn the "+dealer.getHand().getHand().get(0)+".");
+            Thread.sleep(wait);
+            player.drawCard(deck);
+            System.out.println("You've drawn the  "+player.getHand().getHand().get(1)+".");
+            Thread.sleep(wait);
+            dealer.drawCard(deck);
+            System.out.println("The dealer has drawn a covered 2nd card.");
+            Thread.sleep(wait);
         }
-        if (input.equals(exit)) {
-            System.out.println("fuck you");
-            System.exit(0);
-        }
-    }
 
-    public void welcomeMessage() {
-        System.out.println("Welcome to Blackjack!");
-        System.out.println("Type 'start' to begin,");
-        System.out.println("or type 'exit' to stop, playing.");
-    }
-
-    public String takeInput() {
-        return scan.nextLine();
-    }
-
-    public void playerDraw() {
-        playerHand.addCard(deck.draw());
-    }
-
-    public void dealerDraw() {
-        dealerHand.addCard(deck.draw());
-    }
-
-    public void playRound() {
-        playerDraw();
-        System.out.println("You received a "+playerHand.getHand().get(0).toString());
-        dealerDraw();
-        System.out.println("The dealer received a "+dealerHand.getHand().get(0).toString());
+    private void playerTurn() {
+        System.out.println("You've got: "+Arrays.toString(player.getHand().getHandAsStringArray()));
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
