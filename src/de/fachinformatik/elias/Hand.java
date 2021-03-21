@@ -10,6 +10,14 @@ public class Hand {
 
     public Hand() {}
 
+    public int getAces() {
+        return nrAces;
+    }
+
+    public ArrayList<Card> getHand() {
+        return hand;
+    }
+
     public int getValue() {
         return value;
     }
@@ -23,10 +31,6 @@ public class Hand {
                 value -= 10;
                 nrAces--;
         }
-    }
-
-    public ArrayList<Card> getHand() {
-        return hand;
     }
 
     public String[] getHandAsStringArray() {
