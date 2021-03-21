@@ -1,5 +1,9 @@
-package de.fachinformatik.fowl;
+package de.fachinformatik.elias.tests;
 
+import de.fachinformatik.elias.Card;
+import de.fachinformatik.elias.Deck;
+import de.fachinformatik.elias.Rank;
+import de.fachinformatik.elias.Suit;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -10,7 +14,7 @@ public class DeckTest {
     @Test
     void constructorWorks() {
         Deck deck = new Deck();
-        Card card = new Card(Suit.SPADES,Rank.ACE);
+        Card card = new Card(Suit.SPADES, Rank.ACE);
         assertEquals(deck.getDeck().size(),52);
         assertEquals(deck.getDeck().get(0).toString(),card.toString());
     }
@@ -19,7 +23,7 @@ public class DeckTest {
     void addDeckWorks() {
         Deck deck = new Deck();
         deck.addDeck(nrDecks);
-        assertTrue(deck.getDeck().size()==52+nrDecks*52);
+        assertEquals(52 + nrDecks * 52, deck.getDeck().size());
     }
 
     @Test

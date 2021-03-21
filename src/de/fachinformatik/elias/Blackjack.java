@@ -1,4 +1,4 @@
-package de.fachinformatik.fowl;
+package de.fachinformatik.elias;
 
 import java.util.Scanner;
 
@@ -10,7 +10,7 @@ public class Blackjack {
     Scanner scan = new Scanner(System.in);
     String input = "notEmpty";
 
-    public void Blackjack() {}
+    public Blackjack() {}
 
     public void start() {
         welcomeMessage();

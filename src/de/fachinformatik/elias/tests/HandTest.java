@@ -1,5 +1,9 @@
-package de.fachinformatik.fowl;
+package de.fachinformatik.elias.tests;
 
+import de.fachinformatik.elias.Card;
+import de.fachinformatik.elias.Hand;
+import de.fachinformatik.elias.Rank;
+import de.fachinformatik.elias.Suit;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -17,7 +21,7 @@ public class HandTest {
     @Test
     void addCardWorks() {
         Hand hand = new Hand();
-        Card card = new Card(Suit.SPADES,Rank.ACE);
+        Card card = new Card(Suit.SPADES, Rank.ACE);
         hand.addCard(card);
         assertEquals(Arrays.toString(hand.getHandAsStringArray()),"["+card.toString()+"]");
     }

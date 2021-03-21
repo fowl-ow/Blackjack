@@ -1,4 +1,4 @@
-package de.fachinformatik.fowl;
+package de.fachinformatik.elias;
 
 public class Card {
 

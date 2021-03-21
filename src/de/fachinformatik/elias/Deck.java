@@ -1,11 +1,11 @@
-package de.fachinformatik.fowl;
+package de.fachinformatik.elias;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class Deck {
 
-    private ArrayList<Card> deck = new ArrayList<Card>();
+    private ArrayList<Card> deck = new ArrayList<>();
 
     public Deck() {
         for (Suit s: Suit.values()) {
