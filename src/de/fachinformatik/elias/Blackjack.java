@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Blackjack {
 
-    private int wait = 1;
+    private int wait = 1000;
     private Deck deck;
     private Player player;
     private Dealer dealer;
