@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Blackjack {
 
-    private int wait = 1000;
+    private int wait = 250
     private Deck deck;
     private Player player;
     private Dealer dealer;
@@ -25,15 +25,18 @@ public class Blackjack {
     private void initPlayer() {
         System.out.println("Please enter your name: ");
         player = new Player(scan.next());
-        System.out.println("Hi "+player.getName()+".");
+        System.out.println("Hi " + player.getName() + ".");
     }
-
 
 
     private void playRound() {
         player.getHand().getHand().clear();
         dealer.getHand().getHand().clear();
-        try {setupRound();} catch (InterruptedException e) {e.printStackTrace();}
+        try {
+            setupRound();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         if (checkIfContinue()) {
             showDealerInitStatus();
             showPlayerStatus();
@@ -47,13 +50,13 @@ public class Blackjack {
         System.out.println("Let's begin!");
         Thread.sleep(wait);
         player.drawCard(deck);
-        System.out.println("You've drawn the "+player.getHand().getHand().get(0)+".");
+        System.out.println("You've drawn the " + player.getHand().getHand().get(0) + ".");
         Thread.sleep(wait);
         dealer.drawCard(deck);
-        System.out.println("The dealer has drawn the "+dealer.getHand().getHand().get(0)+".");
+        System.out.println("The dealer has drawn the " + dealer.getHand().getHand().get(0) + ".");
         Thread.sleep(wait);
         player.drawCard(deck);
-        System.out.println("You've drawn the  "+player.getHand().getHand().get(1)+".");
+        System.out.println("You've drawn the  " + player.getHand().getHand().get(1) + ".");
         Thread.sleep(wait);
         dealer.drawCard(deck);
         System.out.println("The dealer has drawn a covered 2nd card.");
@@ -65,7 +68,7 @@ public class Blackjack {
     }
 
     private void showDealerInitStatus() {
-        System.out.println("The dealer has got at minimum " + dealer.getHand().getHand().get(0).getValue()+".");
+        System.out.println("The dealer has got at minimum " + dealer.getHand().getHand().get(0).getValue() + ".");
     }
 
     private void showDealerStatus() {
@@ -73,7 +76,7 @@ public class Blackjack {
     }
 
     private void showDealer2ndCard() {
-        System.out.println("The dealers covered card is a " + dealer.getHand().getHand().get(1)+".");
+        System.out.println("The dealers covered card is a " + dealer.getHand().getHand().get(1) + ".");
         System.out.println("The dealers hand is valued at " + dealer.getHand().getValue());
     }
 
@@ -84,7 +87,7 @@ public class Blackjack {
             return false;
         } else if (player.getHand().getValue() > 21) {
             if (player.getHand().getAces() > 0) {
-                player.getHand().updateValue();
+                player.getHand().updateValues();
                 System.out.println("Your ace counts as 1 since otherwise your hand would be above 21.");
                 showPlayerStatus();
                 checkIfContinue();
@@ -102,28 +105,28 @@ public class Blackjack {
         input = scan.next();
         if (input.equalsIgnoreCase(yes)) {
             player.drawCard(deck);
-            System.out.println("You've drawn the "+player.getHand().getHand().get(count)+".");
+            System.out.println("You've drawn the " + player.getHand().getHand().get(count) + ".");
             count++;
             showPlayerStatus();
             if (checkIfContinue()) {
-            playerDraw();
+                playerDraw();
             } else return;
         }
     }
 
     private void dealerDraw() {
-        if (dealer.getHand().getValue()>21) {
-            dealer.getHand().updateValue();
-        } else if (dealer.getHand().getValue()==21) {
+        if (dealer.getHand().getValue() > 21) {
+            dealer.getHand().updateValues();
+        } else if (dealer.getHand().getValue() == 21) {
             System.out.println("The dealer won.");
             askPlayAgain();
-        } else if (dealer.getHand().getValue()>player.getHand().getValue()) {
+        } else if (dealer.getHand().getValue() > player.getHand().getValue()) {
             System.out.println("The dealer won.");
             askPlayAgain();
         } else {
             System.out.println("The dealer draws another card.");
             dealer.drawCard(deck);
-            System.out.println("The dealer has drawn the "+dealer.getHand().getHand().get(2)+".");
+            System.out.println("The dealer has drawn the " + dealer.getHand().getHand().get(2) + ".");
             showDealerStatus();
             showPlayerStatus();
         }
@@ -136,5 +139,4 @@ public class Blackjack {
         if (answer.equalsIgnoreCase(yes)) playRound();
         else if (answer.equalsIgnoreCase(no)) System.exit(0);
     }
-
 }

@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 public class Hand {
 
+    //highValue treats one single Ace as 11 (Default Ace=1)
     private int value;
-    private int nrAces;
+    private int highValue;
+    private boolean highEnabled;
     private ArrayList<Card> hand = new ArrayList<>();
 
     public Hand() {}
@@ -22,15 +24,17 @@ public class Hand {
         return value;
     }
 
-    public void updateValue() {
+    public int getHighValue() {
+        return highValue;
+    }
+
+    public void updateValues() {
         value = 0;
         for (Card c: hand) {
-            value =+ c.getValue();
+            value += c.getValue();
         }
-        if (value > 21 && nrAces > 0) {
-                value -= 10;
-                nrAces--;
-        }
+        highValue = value;
+        if (highEnabled) highValue += 10;
     }
 
     public String[] getHandAsStringArray() {
@@ -44,14 +48,15 @@ public class Hand {
     }
 
     public void addCard(Card card) {
-        if (card.getValue() == 11) nrAces++;
+        if (card.getValue() == 1 && !highEnabled) highEnabled = true;
         hand.add(card);
-        value += card.getValue();
-
+        updateValues();
     }
 
     public void clear() {
         hand.clear();
         value = 0;
+        highValue = 0;
+        highEnabled = false;
     }
 }
