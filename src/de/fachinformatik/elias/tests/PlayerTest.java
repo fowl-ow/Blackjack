@@ -9,9 +9,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class PlayerTest {
 
     @Test
-    void constructorWorks() {
-        Player player = new Player("test");
-        assertEquals(player.getName(),"test");
+    void constructorAndTitleCaseNameWorks() {
+        Player player = new Player("tEsT");
+        assertEquals("Test",player.getName());
     }
 
     @Test

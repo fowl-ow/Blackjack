@@ -7,21 +7,26 @@ public class Hand {
     //highValue treats one single Ace as 11 (Default Ace=1)
     private int value;
     private int highValue;
-    private boolean highEnabled;
+    private boolean highEnabled = false;
     private ArrayList<Card> hand = new ArrayList<>();
 
     public Hand() {}
-
-    public int getAces() {
-        return nrAces;
-    }
 
     public ArrayList<Card> getHand() {
         return hand;
     }
 
+    public int getCorrectValue() {
+        if (highEnabled && highValue <= 21) return highValue;
+        return value;
+    }
+
     public int getValue() {
         return value;
+    }
+
+    public boolean getHighEnabled() {
+        return highEnabled;
     }
 
     public int getHighValue() {
