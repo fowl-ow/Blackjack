@@ -1,9 +1,9 @@
 defmodule Blackjack.Deck do
   use GenServer
+
   @moduledoc """
   Documentation for `Blackjack.Deck`.
   """
-
 
   # Client
 
@@ -11,21 +11,29 @@ defmodule Blackjack.Deck do
     GenServer.start_link(__MODULE__, amount)
   end
 
-  def draw(pid, deck) do
-    GenServer.call(pid, {:draw, deck})
+  def draw(pid) do
+    GenServer.call(pid, :draw)
   end
 
   # Server (callbacks)
 
   @imp true
   def init(amount) do
-    {:ok, create_deck(amount)}
+    {:ok, {create_deck(amount), amount}}
   end
 
   @imp true
-  def handle_call(:draw, _from, deck) do
-    [ card | rest ] = deck
-    {:reply, card, rest}
+  def handle_call(:draw, _from, {deck, amount}) do
+    case deck do
+      [] ->
+        new_deck = create_deck(amount)
+        [card | rest] = new_deck
+        {:reply, card, {rest, amount}}
+
+      _ ->
+        [card | rest] = deck
+        {:reply, card, {rest, amount}}
+    end
   end
 
   @doc """
@@ -37,9 +45,11 @@ defmodule Blackjack.Deck do
 
   """
   def create_deck(amount) do
-    cards = for suit <- [:spades, :hearts, :diamonds, :clubs],
-      value <- 2..14,
-      do: {suit, value}
+    cards =
+      for suit <- [:spades, :hearts, :diamonds, :clubs],
+          value <- 2..14,
+          do: {suit, value}
+
     Enum.shuffle(Enum.take(cards, amount * 52))
   end
 end
