@@ -8,7 +8,7 @@ defmodule BlackjackDeckTest do
   end
 
   test "can draw cards", %{pid: pid} do
-    Enum.each(1..99*52, fn _ ->
+    Enum.each(1..(99 * 52), fn _ ->
       assert Blackjack.Deck.draw(pid) in single_deck()
     end)
   end

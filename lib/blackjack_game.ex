@@ -8,5 +8,4 @@ defmodule Blackjack.Game do
 
   ## Examples
   """
-
 end

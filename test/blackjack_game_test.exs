@@ -1,3 +1,2 @@
 defmodule BlackjackGameTest do
-  
 end
