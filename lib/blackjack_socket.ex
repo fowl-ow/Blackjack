@@ -8,10 +8,11 @@ defmodule Blackjack.Server do
   end
 
   # Server
-  
+
   def init(port) do
     {:ok, socket} =
       :gen_tcp.listen(port, [:binary, packet: :line, active: false, reuseaddr: true])
+
     {:ok, socket}
 
     {:ok, client} = :gen_tcp.accept(socket)
@@ -37,55 +38,54 @@ defmodule Blackjack.PlayerSupervisor do
 end
 
 defmodule Blackjack.Player do
-    use GenServer
+  use GenServer
 
-    # Client
+  # Client
 
-    def start_link(socket) do
+  def start_link(socket) do
+  end
 
-    end
+  # Server
 
-    # Server
+  def init(socket) do
+    {:ok, socket} = :gen_tcp.controlling_process(socket, self())
+    {:ok, %{socket: socket}}
+  end
 
-    def init(socket) do
-      {:ok, socket} = :gen_tcp.controlling_process(socket, self())
-      {:ok, %{socket: socket}}
-    end
+  def handle_info({:tcp, socket, data}, state) do
+  end
 
-    def handle_info({:tcp, socket, data}, state) do
-    end
-
-    defp via_tuple(socket) do
-      {:via, :gen_server, {__MODULE__, socket}}
-    end
+  defp via_tuple(socket) do
+    {:via, :gen_server, {__MODULE__, socket}}
+  end
 end
 
-  # def accept(port) do
-  #   {:ok, socket} =
-  #     :gen_tcp.listen(port, [:binary, packet: :line, active: false, reuseaddr: true])
-  #
-  #   loop_acceptor(socket)
-  # end
-  #
-  # defp loop_acceptor(socket) do
-  #   {:ok, client} = :gen_tcp.accept(socket)
-  #   serve(client)
-  #   loop_acceptor(socket)
-  # end
-  #
-  # defp serve(socket) do
-  #   socket
-  #   |> read_line()
-  #   |> write_line(socket)
-  #
-  #   serve(socket)
-  # end
-  #
-  # defp read_line(socket) do
-  #   {:ok, data} = :gen_tcp.recv(socket, 0)
-  #   data
-  # end
-  #
-  # defp write_line(data, socket) do
-  #   :gen_tcp.send(socket, data)
-  # end
+# def accept(port) do
+#   {:ok, socket} =
+#     :gen_tcp.listen(port, [:binary, packet: :line, active: false, reuseaddr: true])
+#
+#   loop_acceptor(socket)
+# end
+#
+# defp loop_acceptor(socket) do
+#   {:ok, client} = :gen_tcp.accept(socket)
+#   serve(client)
+#   loop_acceptor(socket)
+# end
+#
+# defp serve(socket) do
+#   socket
+#   |> read_line()
+#   |> write_line(socket)
+#
+#   serve(socket)
+# end
+#
+# defp read_line(socket) do
+#   {:ok, data} = :gen_tcp.recv(socket, 0)
+#   data
+# end
+#
+# defp write_line(data, socket) do
+#   :gen_tcp.send(socket, data)
+# end
