@@ -1,27 +1,34 @@
 defmodule Blackjack.Player do
   use GenServer
 
-  # Client
+  # Client side
 
   def start_link(name) do
     GenServer.start_link(__MODULE__, name)
   end
 
-  # Server (callbacks)
+  def start_n_players(n) do
+    if n == 0 do
+      :ok
+    else
+      Blackjack.Player.start_link("#{n}")
+      start_n_players(n - 1)
+    end
+  end
+
+  # Server side
 
   def init(name) do
-    {:ok, %{name: name, connection: nil}}
+    case register(name) do
+      :ok -> {:ok, name}
+      :error -> :error
+    end
   end
 
-  def handle_call({:set_connection, connection}, _from, state) do
-    {:reply, :ok, %{state | connection: connection}}
-  end
-
-  def handle_call(:get_connection, _from, state) do
-    {:reply, state.connection, state}
-  end
-
-  def handle_call(:get_name, _from, state) do
-    {:reply, state.name, state}
+  def register(name) do
+    case Blackjack.Registry.register_player(self(), name) do
+      :ok -> :ok
+      _ -> :error
+    end
   end
 end

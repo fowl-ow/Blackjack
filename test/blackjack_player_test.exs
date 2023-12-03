@@ -1,9 +1,9 @@
 defmodule BlackjackPlayerTest do
   use ExUnit.Case
   doctest Blackjack.Player
-  
-  setup do 
-    {:ok, pid} = Blackjack.Player.start_link("Bob")}
+
+  setup do
+    # {:ok, pid} = Blackjack.Player.start_link("Bob")}
     {:ok, pid: pid}
   end
 
